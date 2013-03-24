@@ -39,7 +39,7 @@ options.phpunitClass = "PHPUnit_Extensions_SeleniumTestCase";
 
 options.header =
     '<?php\n' +
-    'class Example extends ' + '${phpunitClass}' + '\n' +
+    'class ' + '${className}' + ' extends ' + '${phpunitClass}' + '\n' +
     '{\n' +
     indents(1) + 'protected function setUp()\n' +
     indents(1) + '{\n' +
