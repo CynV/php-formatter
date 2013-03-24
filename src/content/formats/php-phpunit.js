@@ -45,7 +45,7 @@ options.header =
     indents(2) + '${receiver}->setBrowserUrl("${baseURL}");\n' +
     indents(1) + '}\n' +
     '\n' +
-    indents(1) + 'public function testMyTestCase()\n' +
+    indents(1) + 'public function ' + '${methodName}()\n' +
     indents(1) + '{\n';
 
 options.footer =
