@@ -155,6 +155,8 @@ this.configForm =
     '<textbox id="options_receiver" />' +
     '<description>Environment</description>' +
     '<textbox id="options_environment" />' +
+    '<description>PHPUnit Class</description>' +
+    '<textbox id="options_phpunitClass" />' +
     '<description>Indent</description>' +
     '<menulist id="options_indent"><menupopup>' +
     '<menuitem label="Tab" value="tab"/>' +

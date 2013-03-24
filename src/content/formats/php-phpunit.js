@@ -35,9 +35,11 @@ function verifyTextPresent(expression) {
     return  '$this->verifyTextPresent("' + e.slice(e.indexOf('"') +1, e.lastIndexOf('"')) + '");';
 }
 
+options.phpunitClass = "PHPUnit_Extensions_SeleniumTestCase";
+
 options.header =
     '<?php\n' +
-    'class Example extends PHPUnit_Extensions_SeleniumTestCase\n' +
+    'class Example extends ' + '${phpunitClass}' + '\n' +
     '{\n' +
     indents(1) + 'protected function setUp()\n' +
     indents(1) + '{\n' +
