@@ -25,7 +25,10 @@ formatHeader = function (testCase) {
 }
 
 function testClassName(testName) {
-    return capitalize(testName);
+  return testName.split(/[^0-9A-Za-z]+/).map(
+      function(x) {
+        return capitalize(x);
+      }).join('');
 }
 
 function testMethodName(testName) {
