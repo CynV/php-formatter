@@ -1,6 +1,36 @@
 var subScriptLoader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"].getService(Components.interfaces.mozIJSSubScriptLoader);
 subScriptLoader.loadSubScript('chrome://selenium-ide/content/formats/remoteControl.js', this);
 
+formatHeader = function (testCase) {
+  var className = testCase.getTitle();
+  if (!className) {
+    className = "NewTest";
+  }
+  className = testClassName(className);
+  var formatLocal = testCase.formatLocal(this.name);
+  methodName = testMethodName(className.replace(/Test$/i, "").replace(/^Test/i, "").
+      replace(/^[A-Z]/, function(str) {
+        return str.toLowerCase();
+      }));
+  var header = (options.getHeader ? options.getHeader() : options.header).
+      replace(/\$\{className\}/g, className).
+      replace(/\$\{methodName\}/g, methodName).
+      replace(/\$\{baseURL\}/g, testCase.getBaseURL()).
+      replace(/\$\{([a-zA-Z0-9_]+)\}/g, function(str, name) {
+        return options[name];
+      });
+  this.lastIndent = indents(parseInt(options.initialIndents, 10));
+  formatLocal.header = header;
+  return formatLocal.header;
+}
+
+function testClassName(testName) {
+  return testName.split(/[^0-9A-Za-z]+/).map(
+      function(x) {
+        return capitalize(x);
+      }).join('');
+}
+
 function testMethodName(testName) {
     return "test" + capitalize(testName);
 }
@@ -155,6 +185,8 @@ this.configForm =
     '<textbox id="options_receiver" />' +
     '<description>Environment</description>' +
     '<textbox id="options_environment" />' +
+    '<description>PHPUnit Class</description>' +
+    '<textbox id="options_phpunitClass" />' +
     '<description>Indent</description>' +
     '<menulist id="options_indent"><menupopup>' +
     '<menuitem label="Tab" value="tab"/>' +

@@ -35,9 +35,11 @@ function verifyTextPresent(expression) {
     return  '$this->verifyTextPresent("' + e.slice(e.indexOf('"') +1, e.lastIndexOf('"')) + '");';
 }
 
+options.phpunitClass = "PHPUnit_Extensions_SeleniumTestCase";
+
 options.header =
     '<?php\n' +
-    'class Example extends PHPUnit_Extensions_SeleniumTestCase\n' +
+    'class ' + '${className}' + ' extends ' + '${phpunitClass}' + '\n' +
     '{\n' +
     indents(1) + 'protected function setUp()\n' +
     indents(1) + '{\n' +
@@ -45,7 +47,7 @@ options.header =
     indents(2) + '${receiver}->setBrowserUrl("${baseURL}");\n' +
     indents(1) + '}\n' +
     '\n' +
-    indents(1) + 'public function testMyTestCase()\n' +
+    indents(1) + 'public function ' + '${methodName}()\n' +
     indents(1) + '{\n';
 
 options.footer =
